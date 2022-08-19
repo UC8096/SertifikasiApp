@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="bottom"
+    android:orientation="vertical"
+    tools:context=".LoginActivity">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1200px"
+            android:gravity="center"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="1dp">
+
+            <TextView
+                android:layout_width="600px"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_bold"
+
+                android:gravity="center"
+                android:text="@string/welcomeTodoapp"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textSize="34sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="400px"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25px"
+                android:fontFamily="@font/poppins"
+                android:gravity="center"
+                android:text="@string/desc_todoapp"
+                android:textAlignment="center" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="bottom|center"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/buttonlogin"
+                android:layout_width="600px"
+                android:layout_height="170px"
+                android:layout_marginBottom="500px"
+                android:drawableRight="@drawable/outline_fingerprint_24"
+                android:drawableTint="@color/white"
+                android:fontFamily="@font/poppins"
+                android:text="@string/buttonLogin" />
+        </LinearLayout>
+
+</LinearLayout>
