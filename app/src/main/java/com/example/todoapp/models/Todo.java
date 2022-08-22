@@ -4,28 +4,66 @@ import io.realm.RealmObject;
 
 public class Todo extends RealmObject {
     private String id;
-    private String title;
-    private String description;
+    private String nama;
+    private String alamat;
+    private String phone;
+    private String sex;
     private String location;
+    private byte[] image;
 
-//    public Todo() {
-//    }
-//
-//    public Todo(String id, String title, String description) {
-//        this.id = id;
-//        this.title = title;
-//        this.description = description;
-//    }
+    public String getID() {
+        return id;
+    }
 
-    public String getID() { return id; }
-    public void setID(String value) { this.id = value; }
+    public void setID(String value) {
+        this.id = value;
+    }
 
-    public String getTitle() { return title; }
-    public void setTitle(String value) { this.title = value; }
+    public String getNama() {
+        return nama;
+    }
 
-    public String getDescription() { return description; }
-    public void setDescription(String value) { this.description = value; }
+    public void setNama(String value) {
+        this.nama = value;
+    }
 
-    public String getLocation() { return location; }
-    public void setLocation(String value) { this.location = value; }
+    public String getAlamat() {
+        return alamat;
+    }
+
+    public void setAlamat(String value) {
+        this.alamat = value;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String value) {
+        this.phone = value;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String value) {
+        this.sex = value;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String value) {
+        this.location = value;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] value) {
+        this.image = value;
+    }
 }

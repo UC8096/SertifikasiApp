@@ -12,11 +12,15 @@ import android.provider.Settings;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.todoapp.adaptors.BottomSheetDialog;
+import com.example.todoapp.adaptors.BottomSheetLoginDialog;
+
 import java.util.concurrent.Executor;
 
 public class LoginActivity extends AppCompatActivity {
 
-    Button masukBttn;
+    Button masukBttn, masukAdminBttn;
+    BottomSheetLoginDialog bottomSheetDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,9 +28,11 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         masukBttn = findViewById(R.id.buttonlogin);
+        masukAdminBttn = findViewById(R.id.buttonloginAdmin);
         checkBiometricSupported();
 
         Executor executor = ContextCompat.getMainExecutor(this);
+
         androidx.biometric.BiometricPrompt biometricPrompt = new androidx.biometric.BiometricPrompt(LoginActivity.this, executor, new androidx.biometric.BiometricPrompt.AuthenticationCallback() {
             @Override
             public void onAuthenticationError(int errorCode, @NonNull CharSequence errString) {
@@ -40,6 +46,7 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(LoginActivity.this, "Auth Succeeded", Toast.LENGTH_SHORT).show();
 
                 Intent main = new Intent(LoginActivity.this, MainActivity.class);
+                main.putExtra("isAdmin", false);
                 startActivity(main);
             }
 
@@ -51,11 +58,20 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+
+        bottomSheetDialog = new BottomSheetLoginDialog();
+
         masukBttn.setOnClickListener(view -> {
             BiometricPrompt.PromptInfo.Builder promptInfo = dialogMetric();
             promptInfo.setNegativeButtonText("Cancel");
             biometricPrompt.authenticate(promptInfo.build());
         });
+
+        masukAdminBttn.setOnClickListener(view -> {
+            bottomSheetDialog.show(getSupportFragmentManager(), "Tag");
+
+        });
+
 
     }
 

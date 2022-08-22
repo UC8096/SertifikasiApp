@@ -3,12 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Project/Android/TodoApp/app/src/main/res/layout/activity_login.xml" value="0.18854166666666666" />
-        <entry key="..\:/Project/Android/TodoApp/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/Project/Android/TodoApp/app/src/main/res/layout/activity_login.xml" value="0.22" />
+        <entry key="..\:/Project/Android/TodoApp/app/src/main/res/layout/activity_main.xml" value="0.20153985507246377" />
         <entry key="..\:/Project/Android/TodoApp/app/src/main/res/layout/activity_update.xml" value="0.18854166666666666" />
         <entry key="..\:/Project/Android/TodoApp/app/src/main/res/layout/fragment_login.xml" value="0.1" />
-        <entry key="..\:/Project/Android/TodoApp/app/src/main/res/layout/item_todo.xml" value="0.25" />
-        <entry key="..\:/Project/Android/TodoApp/app/src/main/res/layout/todo_dialog.xml" value="0.22" />
+        <entry key="..\:/Project/Android/TodoApp/app/src/main/res/layout/item_todo.xml" value="0.2" />
+        <entry key="..\:/Project/Android/TodoApp/app/src/main/res/layout/login_dialog.xml" value="0.36666666666666664" />
+        <entry key="..\:/Project/Android/TodoApp/app/src/main/res/layout/todo_dialog.xml" value="0.20153985507246377" />
         <entry key="..\:/Project/Android/TodoApp/app/src/main/res/layout/update_dialog.xml" value="0.1" />
       </map>
     </option>

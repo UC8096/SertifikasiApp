@@ -2,15 +2,16 @@ package com.example.todoapp.adaptors;
 
 import android.Manifest;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,18 +20,20 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.todoapp.R;
 import com.example.todoapp.models.Todo;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
@@ -40,11 +43,17 @@ import io.realm.Realm;
 
 public class BottomSheetDialog extends BottomSheetDialogFragment {
 
-    EditText titleEditText, descriptionEditText, locationEditText;
+    RadioGroup jenisKelaminRG;
+    EditText namaEditText, alamatEditText, noHpEditText, locationEditText;
     LocationManager locationManager;
     Button addButton, cancelButton;
-    ImageButton getLocationButton;
-    String latitude, longitude;
+    ImageButton getLocationButton, getImageButton;
+    String jenisKelamin, latitude, longitude;
+
+    ImageView viewImage;
+    final int kodeGalery = 100;
+    Uri imageUri;
+    byte[] blobImage;
 
     @Nullable
     @Override
@@ -57,20 +66,36 @@ public class BottomSheetDialog extends BottomSheetDialogFragment {
         Realm.init(getContext());
         Realm realm = Realm.getDefaultInstance();
 
-        titleEditText = view.findViewById(R.id.textFieldTitle);
-        descriptionEditText = view.findViewById(R.id.textFieldDescription);
+        namaEditText = view.findViewById(R.id.textFieldNama);
+        alamatEditText = view.findViewById(R.id.textFieldAlamat);
+        noHpEditText = view.findViewById(R.id.textFieldNoHp);
         locationEditText = view.findViewById(R.id.textFieldLocation);
+
+        jenisKelaminRG = view.findViewById(R.id.radioGroup);
 
         addButton = view.findViewById(R.id.buttonAdd);
         cancelButton = view.findViewById(R.id.buttonCancel);
 
+        getImageButton = view.findViewById(R.id.buttonImage);
         getLocationButton = view.findViewById(R.id.buttonGetLocation);
+        viewImage = view.findViewById(R.id.imagePreview);
 
         locationManager = (LocationManager)
                 requireContext().getSystemService(Context.LOCATION_SERVICE);
 
-        getLocationButton.setOnClickListener(view1 -> {
+        jenisKelaminRG.setOnCheckedChangeListener((radioGroup, id) -> {
+            switch (id) {
+                case R.id.radio_button_1:
+                    jenisKelamin = "laki-Laki";
+                    break;
+                case R.id.radio_button_2:
+                    jenisKelamin = "Perempuan";
+                    break;
 
+            }
+        });
+
+        getLocationButton.setOnClickListener(view1 -> {
             if
             (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
                 OnGPS();
@@ -79,36 +104,54 @@ public class BottomSheetDialog extends BottomSheetDialogFragment {
             }
         });
 
-        cancelButton.setOnClickListener(view1 -> {
+        getImageButton.setOnClickListener(view12 ->
 
-            titleEditText.setText("");
-            descriptionEditText.setText("");
+        {
+            Intent intentGalery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(intentGalery, kodeGalery);
+        });
+
+        cancelButton.setOnClickListener(view1 ->
+
+        {
+
+            namaEditText.setText("");
+            alamatEditText.setText("");
             locationEditText.setText("");
-
+            noHpEditText.setText("");
+            jenisKelaminRG.clearCheck();
             dismiss();
 
         });
 
-        addButton.setOnClickListener(view1 -> {
+        addButton.setOnClickListener(view1 ->
+
+        {
             Random random = new Random();
 
             realm.beginTransaction();
             Todo todo = realm.createObject(Todo.class);
 
             todo.setID(String.valueOf(random.nextInt(1000)));
-            todo.setTitle(titleEditText.getText().toString());
-            todo.setDescription(descriptionEditText.getText().toString());
+            todo.setNama(namaEditText.getText().toString());
+            todo.setAlamat(alamatEditText.getText().toString());
+            todo.setPhone(noHpEditText.getText().toString());
+            todo.setSex(jenisKelamin);
             todo.setLocation(locationEditText.getText().toString());
+            todo.setImage(blobImage);
 
             realm.commitTransaction();
 
-            titleEditText.setText("");
-            descriptionEditText.setText("");
+            namaEditText.setText("");
+            alamatEditText.setText("");
+            noHpEditText.setText("");
             locationEditText.setText("");
+            jenisKelaminRG.clearCheck();
 
             dismiss();
 
         });
+
 
         return view;
     }
@@ -158,4 +201,22 @@ public class BottomSheetDialog extends BottomSheetDialogFragment {
             }
         }
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == kodeGalery && resultCode == getActivity().RESULT_OK) {
+            imageUri = data.getData();
+            viewImage.setImageURI(imageUri);
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), imageUri);
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
+                blobImage = stream.toByteArray();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 }

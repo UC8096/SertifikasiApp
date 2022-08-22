@@ -12,4 +12,18 @@
     <string name="cancel">Cancel</string>
     <string name="update">Update</string>
     <string name="location">Location</string>
+    <string name="welcome_to_pendaftaran">Welcome to App</string>
+    <string name="mari_daftarkan_data_diri_kamu">mari daftarkan data diri kamu</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="sex">Sex</string>
+    <string name="location_daftar">Location Daftar</string>
+    <string name="phone">Phone</string>
+    <string name="name">Name</string>
+    <string name="alamat">Alamat</string>
+    <string name="nama">Nama</string>
+    <string name="no_hp">No Hp</string>
+    <string name="laki_laki">Laki-Laki</string>
+    <string name="perempuan">Perempuan</string>
 </resources>

@@ -10,7 +10,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="1200px"
+            android:layout_height="500px"
             android:gravity="center"
             android:orientation="vertical"
             tools:layout_editor_absoluteX="1dp">
@@ -21,7 +21,7 @@
                 android:fontFamily="@font/poppins_bold"
 
                 android:gravity="center"
-                android:text="@string/welcomeTodoapp"
+                android:text="@string/welcome_to_pendaftaran"
                 android:textAlignment="center"
                 android:textAllCaps="false"
                 android:textSize="34sp"
@@ -33,7 +33,7 @@
                 android:layout_marginTop="25px"
                 android:fontFamily="@font/poppins"
                 android:gravity="center"
-                android:text="@string/desc_todoapp"
+                android:text="@string/mari_daftarkan_data_diri_kamu"
                 android:textAlignment="center" />
 
         </LinearLayout>
@@ -48,11 +48,23 @@
                 android:id="@+id/buttonlogin"
                 android:layout_width="600px"
                 android:layout_height="170px"
-                android:layout_marginBottom="500px"
+                android:layout_marginBottom="20px"
+                android:background="@color/purple_200"
                 android:drawableRight="@drawable/outline_fingerprint_24"
                 android:drawableTint="@color/white"
                 android:fontFamily="@font/poppins"
-                android:text="@string/buttonLogin" />
+                android:text="Login As Guest"
+                android:textColor="@color/white" />
+
+            <Button
+                android:id="@+id/buttonloginAdmin"
+                android:layout_width="600px"
+                android:layout_height="170px"
+                android:layout_marginBottom="500px"
+                android:drawableTint="@color/white"
+                android:fontFamily="@font/poppins"
+                android:drawableRight="@drawable/round_admin_panel_settings_24"
+                android:text="Login As Admin" />
         </LinearLayout>
 
 </LinearLayout>

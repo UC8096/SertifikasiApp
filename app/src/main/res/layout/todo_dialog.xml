@@ -16,12 +16,12 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="60px"
         android:layout_marginVertical="10px"
-        android:hint="@string/title"
+        android:hint="@string/nama"
         app:counterEnabled="true"
         app:counterMaxLength="20">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textFieldTitle"
+            android:id="@+id/textFieldNama"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:imeOptions="actionDone"
@@ -37,10 +37,10 @@
         android:layout_marginHorizontal="60px"
         android:layout_marginVertical="10px"
 
-        android:hint="@string/description">
+        android:hint="@string/alamat">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textFieldDescription"
+            android:id="@+id/textFieldAlamat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:imeOptions="actionDone"
@@ -49,6 +49,60 @@
             android:singleLine="true" />
 
     </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="60px"
+        android:layout_marginVertical="10px"
+
+        android:hint="@string/no_hp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textFieldNoHp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:imeOptions="actionDone"
+            android:inputType="phone"
+
+            android:singleLine="true" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="60px"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="40px"
+            android:text="Jenis Kelamin" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checkedButton="@+id/radio_button_grup"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radio_button_1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/laki_laki" />
+
+            <RadioButton
+                android:id="@+id/radio_button_2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/perempuan" />
+
+        </RadioGroup>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -80,6 +134,38 @@
             android:layout_height="match_parent"
             android:background="#00FFFFFF"
             android:src="@drawable/round_pin_drop_24" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="700px"
+            android:layout_height="300px"
+            android:layout_marginHorizontal="60px"
+            android:layout_marginVertical="10px"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            >
+
+            <ImageView
+                android:id="@+id/imagePreview"
+                android:layout_width="300px"
+                android:layout_height="300px" />
+        </LinearLayout>
+
+
+        <ImageButton
+            android:id="@+id/buttonImage"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="#00FFFFFF"
+            android:src="@drawable/round_image_24" />
 
 
     </LinearLayout>

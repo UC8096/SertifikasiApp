@@ -63,8 +63,6 @@ public class MainActivity extends AppCompatActivity {
 //        Realm.deleteRealm(realm.getConfiguration());
         todoList = realm.where(Todo.class).findAll();
 
-//        realm.commitTransaction();
-
         noDataCheck();
 
         ActivityCompat.requestPermissions(this,
@@ -91,9 +89,11 @@ public class MainActivity extends AppCompatActivity {
 
         adapter = new TodoRecyclerViewAdapter(todoList, MainActivity.this);
         todoRecyclerView.setAdapter(adapter);
+//        savedInstanceState.getBoolean("isAdmin");
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
         itemTouchHelper.attachToRecyclerView(todoRecyclerView);
+
 
         todoList.addChangeListener(notes -> {
             noDataCheck();
@@ -115,6 +115,12 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
             return false;
+        }
+
+        @Override
+        public int getSwipeDirs(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
+            return (getIntent().getExtras().getBoolean("isAdmin") != true) ? 0 : super.getSwipeDirs(recyclerView, viewHolder);
+//            return super.getSwipeDirs(recyclerView, viewHolder);
         }
 
         @Override
@@ -148,10 +154,6 @@ public class MainActivity extends AppCompatActivity {
 
                     bundle.putBoolean("isUpdate", true);
                     bundle.putString("id", todoUpdated.getID());
-                    bundle.putString("title", todoUpdated.getTitle());
-                    bundle.putString("description", todoUpdated.getDescription());
-//                    bundle.putString("location", todoUpdated.getLocation());
-
 
                     Intent intent = new Intent(todoRecyclerView.getContext(), UpdateActivity.class);
                     intent.putExtras(bundle);
@@ -170,30 +172,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
-//            if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
-//                // Get RecyclerView item from the ViewHolder
-//                View itemView = viewHolder.itemView;
-//
-//                Paint p = new Paint();
 
-//                if (dX > 0) {
-//                    p.setARGB( 255,55, 114, 255); // blue
-//
-//                    /* Set your color for positive displacement */
-//                    /* Set your color for positive displacement */
-//
-//                    // Draw Rect with varying right side, equal to displacement dX
-//                    c.drawRect((float) itemView.getLeft(), (float) itemView.getTop(), dX,
-//                            (float) itemView.getBottom(), p);
-//                } else {
-//                    p.setARGB( 255,223, 41, 53); // red
-//
-//                    /* Set your color for negative displacement */
-//
-//                    // Draw Rect with varying left side, equal to the item's right side plus negative displacement dX
-//                    c.drawRect((float) itemView.getRight() + dX, (float) itemView.getTop(),
-//                            (float) itemView.getRight(), (float) itemView.getBottom(), p);
-//                }
             new RecyclerViewSwipeDecorator.Builder(MainActivity.this, c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
                     .addSwipeLeftBackgroundColor(ContextCompat.getColor(MainActivity.this, R.color.purple_500))
                     .addSwipeRightBackgroundColor(ContextCompat.getColor(MainActivity.this, R.color.teal_200))
